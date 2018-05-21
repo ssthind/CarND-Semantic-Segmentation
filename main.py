@@ -100,7 +100,7 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
 
         # perform other steps of FCN-8
         
-        vgg_layer3_4_7_8x = tf.layers.conv2d_transpose( vgg_layer4_7_combined, num_classes, kernal_size1, 
+        vgg_layer3_4_7_8x = tf.layers.conv2d_transpose( vgg_layer3_4_7_combined, num_classes, kernal_size1, 
                                        strides=(2,2), padding='SAME', name="de_conv_3_4_7_8x" ,
                                        kernel_initializer=tf.truncated_normal_initializer(stddev=0.01),
                                        activation=tf.nn.relu)
@@ -112,8 +112,7 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
         
         vgg_layer3_4_7_32x = tf.layers.conv2d_transpose( vgg_layer3_4_7_16x, num_classes, kernal_size1, 
                                        strides=(2,2), padding='SAME', name="de_conv_3_4_7_32x" , 
-                                       kernel_initializer=tf.truncated_normal_initializer(stddev=0.01),
-                                       activation=tf.nn.relu)
+                                       kernel_initializer=tf.truncated_normal_initializer(stddev=0.01))
     
     return vgg_layer3_4_7_32x
 tests.test_layers(layers)
